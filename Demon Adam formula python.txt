@@ -1,0 +1,27 @@
+demon adam python implementation
+refering to demon + adam defined at https://johnchenresearch.github.io/demon/
+concerns: demon relies on knowing remaining amount of iterations in the fraction (1-t/T)
+adam is implemented with two states (momentum and velocity) in tensorflow, demon needs a single state that tracks amount of iterations
+g$$ stands for gradient
+
+adam current? learning rate
+$$lr_t = \mathrm{learning\_rate} * \sqrt{1 - \beta_2^t} / (1 - \beta_1^t)$$
+
+v_t = sum of g_t^2 at t+1
+for adam,
+beta_1 is usually .9
+beta_2 is usually .999
+
+need to define \beta_init, current step t total step T
+beta_t = beta_init * (1 - t / T) / ((1 - beta_init) + beta_init(1 - t / T))
+
+m_t = beta_t * m_{t-1} + g
+
+v_t = beta_2 * v_{t-1} + (1 - beta_2) * g^2
+
+theta_t = theta_{t-1} - lr_t * m_t / (sqrt{v_t} + epsilon)
+
+
+DEMON ADAM
+
+how do players join the server?
